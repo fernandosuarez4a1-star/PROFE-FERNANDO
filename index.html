@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e8f3e8">
+  <meta name="description" content="Aula de Conjuntos: aprende matemáticas con retos interactivos.">
+  <title>Aula de Conjuntos</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Aula de Conjuntos, inicio">
+      <span class="brand-mark">∪</span><span>Aula de <b>Conjuntos</b><small>MATEMÁTICAS INTERACTIVAS</small></span>
+    </a>
+    <div class="top-actions"><span class="status-dot"></span><span id="connectionText">Listo para aprender</span><button id="installBtn" class="button button-outline hidden">Instalar app</button></div>
+  </header>
+
+  <main class="shell">
+    <section id="welcomeView" class="welcome">
+      <div class="welcome-copy">
+        <span class="eyebrow">APRENDE · PRACTICA · SUPERA RETOS</span>
+        <h1>Los conjuntos,<br><em>ahora son un desafío.</em></h1>
+        <p>Explora, resuelve problemas de la vida cotidiana y demuestra todo lo que sabes sobre conjuntos.</p>
+        <div class="welcome-pills"><span>✦ Retos por niveles</span><span>✦ Retroalimentación inmediata</span><span>✦ Seguimiento de avances</span></div>
+      </div>
+      <div class="welcome-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="circle circle-a">A</div><div class="circle circle-b">B</div>
+        <div class="art-caption">A ∪ B <small>Explora las relaciones</small></div>
+      </div>
+      <div class="role-grid">
+        <button class="role-card" data-role="student"><span class="role-icon">✎</span><span><b>Entrar como estudiante</b><small>Resolver actividades y ganar puntos</small></span><span class="arrow">→</span></button>
+        <button class="role-card" data-role="teacher"><span class="role-icon">▤</span><span><b>Entrar como profesor</b><small>Crear retos y revisar resultados</small></span><span class="arrow">→</span></button>
+      </div>
+    </section>
+
+    <section id="studentView" class="dashboard hidden">
+      <div class="page-heading"><div><span class="eyebrow">ESPACIO DEL ESTUDIANTE</span><h2>¡Hola, <span id="studentNameTitle">explorador</span>!</h2><p>Un reto a la vez, cada vez sabes más.</p></div><button class="button button-light" id="studentBack">← Inicio</button></div>
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon">★</span><div><strong id="scoreValue">0</strong><small>Puntos acumulados</small></div></article>
+        <article class="stat-card"><span class="stat-icon">✓</span><div><strong id="solvedValue">0</strong><small>Retos superados</small></div></article>
+        <article class="stat-card"><span class="stat-icon">◎</span><div><strong id="progressValue">0%</strong><small>Progreso general</small></div></article>
+      </div>
+      <div class="section-title"><div><span class="eyebrow">TU RUTA DE APRENDIZAJE</span><h3>Selecciona un desafío</h3></div><span class="level-tag">Nivel inicial → avanzado</span></div>
+      <div id="challengeGrid" class="challenge-grid"></div>
+      <section id="quizPanel" class="quiz-panel hidden">
+        <div class="quiz-top"><span id="quizLevel" class="level-tag">RETO</span><button id="closeQuiz" class="icon-button" aria-label="Cerrar reto">✕</button></div>
+        <div class="quiz-progress"><span id="questionCounter">Pregunta 1</span><div><i id="progressBar"></i></div></div>
+        <h3 id="questionText"></h3><p id="questionHint" class="hint"></p>
+        <div id="answerOptions" class="answer-options"></div>
+        <div id="feedback" class="feedback hidden" role="status"></div>
+        <button id="nextQuestion" class="button button-primary hidden">Continuar →</button>
+      </section>
+    </section>
+
+    <section id="teacherView" class="dashboard hidden">
+      <div class="page-heading"><div><span class="eyebrow">PANEL DOCENTE</span><h2>Centro de aprendizaje</h2><p>Organiza los desafíos y consulta el avance registrado en este dispositivo.</p></div><button class="button button-light" id="teacherBack">← Inicio</button></div>
+      <div class="teacher-grid">
+        <article class="panel-card"><span class="eyebrow">BANCO DE ACTIVIDADES</span><h3>Retos disponibles</h3><strong class="big-number" id="teacherChallengeCount">6</strong><p>Actividades listas para practicar.</p></article>
+        <article class="panel-card"><span class="eyebrow">RESULTADOS LOCALES</span><h3>Retos superados</h3><strong class="big-number" id="teacherSolvedCount">0</strong><p>Respuestas correctas registradas en este navegador.</p></article>
+      </div>
+      <section class="panel-card teacher-instructions"><h3>Orientaciones para el docente</h3><ul><li>Asigne un nombre al estudiante antes de iniciar las actividades.</li><li>Use los retos como práctica formativa o refuerzo de clase.</li><li>Los resultados se guardan en el navegador del dispositivo.</li></ul><p class="notice">Importante: esta versión funciona sin cuentas ni servidor. Los registros no se sincronizan entre teléfonos o computadoras. Para administrar cursos y ver resultados de todos los estudiantes se necesita conectar una base de datos y autenticación.</p></section>
+      <section class="panel-card"><div class="section-title compact"><div><span class="eyebrow">CONTENIDO</span><h3>Retos incluidos</h3></div></div><div id="teacherChallengeList" class="teacher-list"></div></section>
+      <button id="resetData" class="button button-danger">Restablecer resultados de este dispositivo</button>
+    </section>
+  </main>
+  <footer><span>∪ Aula de Conjuntos</span><span>Aprender matemáticas también puede ser un reto.</span></footer>
+
+  <dialog id="nameDialog" class="modal">
+    <form method="dialog" id="nameForm"><span class="eyebrow">ANTES DE COMENZAR</span><h3>¿Cómo te llamas?</h3><p>Escribe tu nombre para personalizar tu espacio.</p><input id="studentName" type="text" maxlength="35" placeholder="Nombre del estudiante" required>
+      <div class="modal-actions"><button class="button button-light" value="cancel">Cancelar</button><button class="button button-primary" id="startStudent" value="start">Comenzar</button></div>
+    </form>
+  </dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>
